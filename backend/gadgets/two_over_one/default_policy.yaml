@@ -1,0 +1,12 @@
+﻿rules:
+  - id: default_pass
+    default_policy: true
+    context:
+      auction_pattern: "*"
+    call: P
+    meaning:
+      call_nature: default
+      action_type: fallback_pass
+      alertable: false
+
+

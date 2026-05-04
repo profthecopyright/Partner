@@ -1,0 +1,238 @@
+cases:
+  - name: transfer_to_hearts_superaccept_is_selected
+    system: expert_2over1
+    auction: 1NP2DP
+    hand: SAQ74HKJ83DA62CQ5
+    environment: &imp_none
+      dealer: n
+      vulnerability: none
+      scoring: IMP
+    expected:
+      call: 3H
+      origin:
+        rule_id: superaccept_hearts
+        gadget_id: four_way_jacoby_transfer
+        qualified_rule_id: notrump_response/four_way_jacoby_transfer@0.1.0:superaccept_hearts
+      public_meaning:
+        alertable: true
+      compared_candidate_calls: [3H, 2H]
+      diagnostics: []
+      semantic_fact_types: [notrump_opening, transfer]
+      semantic_fact_origins:
+        - qualified_rule_id: two_over_one/two_over_one@0.1.0:open_1N
+      selected_criteria_include: [pending_heart_transfer]
+
+  - name: transfer_to_hearts_normal_completion_is_selected
+    system: expert_2over1
+    auction: 1NP2DP
+    hand: SAKQH83DQ762CKJ54
+    environment: *imp_none
+    expected:
+      call: 2H
+      origin:
+        rule_id: complete_hearts
+      semantic_fact_types: [notrump_opening, transfer]
+
+  - name: responder_uses_2d_transfer_with_five_hearts
+    system: expert_2over1
+    auction: 1NP
+    hand: S74HKJ832DA762CQ5
+    environment: *imp_none
+    expected:
+      call: 2D
+      origin:
+        rule_id: transfer_hearts_2D
+        gadget_id: four_way_jacoby_transfer
+      selected_criteria_include: [jacoby_transfer_heart_length]
+
+  - name: notrump_opening_seat_1
+    system: expert_2over1
+    auction: ""
+    hand: &balanced_16 SAQ7HKJ8DA762CQ54
+    environment: *imp_none
+    expected: &open_1n_expected
+      call: 1N
+      origin:
+        rule_id: open_1N
+
+  - name: notrump_opening_seat_2
+    system: expert_2over1
+    auction: P
+    hand: *balanced_16
+    environment: *imp_none
+    expected: *open_1n_expected
+
+  - name: notrump_opening_seat_3
+    system: expert_2over1
+    auction: PP
+    hand: *balanced_16
+    environment: *imp_none
+    expected: *open_1n_expected
+
+  - name: notrump_opening_seat_4
+    system: expert_2over1
+    auction: PPP
+    hand: *balanced_16
+    environment: *imp_none
+    expected: *open_1n_expected
+
+  - name: notrump_2n_opening
+    system: expert_2over1
+    auction: ""
+    hand: SAK7HKJ8DAQ76CK54
+    environment: *imp_none
+    expected:
+      call: 2N
+      origin:
+        rule_id: open_2N
+
+  - name: one_heart_opening_seat_1_2
+    system: expert_2over1
+    auction: ""
+    hand: SK2HAKQ87D765C432
+    environment: *imp_none
+    expected:
+      call: 1H
+      origin:
+        rule_id: open_1H_seat_1_2
+
+  - name: one_spade_opening_seat_1_2
+    system: expert_2over1
+    auction: ""
+    hand: SAKQ87H32D765CK32
+    environment: *imp_none
+    expected:
+      call: 1S
+      origin:
+        rule_id: open_1S_seat_1_2
+
+  - name: one_club_opening_seat_1_2
+    system: expert_2over1
+    auction: ""
+    hand: SA32HKQ7D865CK432
+    environment: *imp_none
+    expected:
+      call: 1C
+      origin:
+        rule_id: open_1C_seat_1_2
+
+  - name: one_diamond_opening_seat_1_2
+    system: expert_2over1
+    auction: ""
+    hand: SA432HKQ7DK432C65
+    environment: *imp_none
+    expected:
+      call: 1D
+      origin:
+        rule_id: open_1D_seat_1_2
+
+  - name: one_major_placeholder_seat_3_4
+    system: expert_2over1
+    auction: PP
+    hand: S432H8765D765C432
+    environment:
+      dealer: n
+      vulnerability: none
+      scoring: IMP
+      enable_placeholder_openings: true
+    expected:
+      call: 1H
+      origin:
+        rule_id: open_1M_seat_3_4_placeholder
+
+  - name: one_minor_placeholder_seat_3_4
+    system: expert_2over1
+    auction: PPP
+    hand: S432H876D7654C432
+    environment:
+      dealer: n
+      vulnerability: none
+      scoring: IMP
+      enable_placeholder_openings: true
+    expected:
+      call: 1C
+      origin:
+        rule_id: open_1m_seat_3_4_placeholder
+
+  - name: strong_two_club_opening
+    system: expert_2over1
+    auction: ""
+    hand: SAKQHAKQDAKQ7C543
+    environment: *imp_none
+    expected:
+      call: 2C
+      origin:
+        rule_id: open_2C
+
+  - name: weak_two_diamond_opening
+    system: expert_2over1
+    auction: ""
+    hand: SJ32H87DKQ9876C54
+    environment: *imp_none
+    expected:
+      call: 2D
+      origin:
+        rule_id: open_2D
+
+  - name: weak_two_heart_opening
+    system: expert_2over1
+    auction: ""
+    hand: SJ32HKQ9876D87C54
+    environment: *imp_none
+    expected:
+      call: 2H
+      origin:
+        rule_id: open_2H
+
+  - name: weak_two_spade_opening
+    system: expert_2over1
+    auction: ""
+    hand: SKQ9876HJ32D87C54
+    environment: *imp_none
+    expected:
+      call: 2S
+      origin:
+        rule_id: open_2S
+
+  - name: notrump_response_expands_by_seat_position
+    system: expert_2over1
+    auction: PP1NP
+    hand: S74HKJ832DA762CQ5
+    environment: *imp_none
+    expected:
+      call: 2D
+      origin:
+        rule_id: transfer_hearts_2D
+
+  - name: notrump_continuation_expands_by_seat_position
+    system: expert_2over1
+    auction: PP1NP2DP
+    hand: SAQ74HKJ83DA62CQ5
+    environment: *imp_none
+    expected:
+      call: 3H
+      semantic_fact_types: [notrump_opening, transfer]
+
+  - name: responder_does_not_use_2d_transfer_with_four_hearts
+    system: expert_2over1
+    auction: 1NP
+    hand: SA74HKJ83DA762CQ5
+    environment: *imp_none
+    expected:
+      call: P
+      origin:
+        qualified_rule_id: two_over_one/two_over_one@0.1.0:default_pass
+      diagnostics_include:
+        - defaulting to P
+
+  - name: unmatched_auction_defaults_to_pass
+    system: expert_2over1
+    auction: 1CP1D
+    hand: SA74HKJ83DA762CQ5
+    environment: *imp_none
+    expected:
+      call: P
+      selected_algorithm: default_policy
+      diagnostics_include:
+        - Undefined historical call 1D
+        - defaulting to P
